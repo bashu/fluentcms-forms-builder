@@ -1,0 +1,9 @@
+django
+django-wysiwyg
+django-any-urlfield
+django-forms-builder
+django-fluent-contents
+django-fluent-pages
+django-tinymce
+pillow
+south
