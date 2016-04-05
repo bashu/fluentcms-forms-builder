@@ -8,7 +8,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('fluent_contents', '0001_initial'),
-        ('forms', '0002_auto_20160405_0424'),
+        ('forms', '0001_initial'),
     ]
 
     operations = [

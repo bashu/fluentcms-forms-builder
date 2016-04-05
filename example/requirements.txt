@@ -1,4 +1,5 @@
-django
+django==1.7.11
+django-mptt==0.7.4
 django-wysiwyg
 django-any-urlfield
 django-forms-builder
@@ -7,3 +8,5 @@ django-fluent-pages
 django-tinymce
 pillow
 south
+
+future==0.15.2
