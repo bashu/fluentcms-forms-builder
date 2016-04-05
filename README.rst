@@ -58,4 +58,4 @@ If you like this module, forked it, or would like to improve it, please let us k
 Pull requests are welcome too. :-)
 
 .. _django-fluent-contents: https://github.com/edoburu/django-fluent-contents
-.. _django-forms-builder_: https://github.com/stephenmcd/django-forms-builder
+.. _django-forms-builder: https://github.com/stephenmcd/django-forms-builder
