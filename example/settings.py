@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'parler',
 
     'fluent_contents',
+    'fluent_contents.plugins.text',
 
     'any_urlfield',
     'django_wysiwyg',
