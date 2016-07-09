@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'parler',
 
     'fluent_contents',
+    'fluent_contents.plugins.text',
 
     'any_urlfield',
     'django_wysiwyg',
@@ -74,6 +75,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'fluent_contents.middleware.HttpRedirectRequestMiddleware',
 ]
 
 TEMPLATE_DIRS = (
@@ -104,6 +106,8 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
