@@ -1,8 +1,8 @@
-django==1.8.13
-django-parler>=1.5,<1.6
+django<2.0
 django-wysiwyg
-django-any-urlfield
-django-forms-builder
+django-slug-preview
+# TODO: replace with upstream version
+https://github.com/sigmacms/django-form-builder/archive/master.zip
 django-fluent-contents
 django-fluent-pages
 django-tinymce

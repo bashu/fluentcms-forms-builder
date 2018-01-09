@@ -6,9 +6,6 @@ django-forms-builder_ content plugins for django-fluent-contents_
 .. image:: https://img.shields.io/pypi/v/fluentcms-forms-builder.svg
     :target: https://pypi.python.org/pypi/fluentcms-forms-builder/
 
-.. image:: https://img.shields.io/pypi/dm/fluentcms-forms-builder.svg
-    :target: https://pypi.python.org/pypi/fluentcms-forms-builder/
-
 .. image:: https://img.shields.io/github/license/bashu/fluentcms-forms-builder.svg
     :target: https://pypi.python.org/pypi/fluentcms-forms-builder/
 
