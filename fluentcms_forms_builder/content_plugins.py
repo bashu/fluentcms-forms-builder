@@ -51,7 +51,7 @@ class FormPlugin(ContentPlugin):
                 FormDetail().send_emails(request, form_for_form, form, entry, attachments)
 
                 if not request.is_ajax() and form.redirect_url:
-                    return redirect(form.redirect_url)
+                    return redirect(str(form.redirect_url))
 
                 return self.render_to_string(request, "fluentcms_forms_builder/form_sent.html", context)
         else:
