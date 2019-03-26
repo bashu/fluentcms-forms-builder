@@ -8,6 +8,7 @@ from django.utils.translation import ugettext, ugettext_lazy as _
 from fluent_contents.models.db import ContentItem
 from forms_builder.forms.models import (
     AbstractFormEntry, AbstractFieldEntry, AbstractField, AbstractForm)
+from forms_builder.forms.utils import slugify, unique_slug
 from any_urlfield.models import AnyUrlField
 
 from .meta import AbstractClassWithoutFieldsNamed as without
@@ -58,6 +59,9 @@ class Field(AbstractField):
     def save(self, *args, **kwargs):
         if self.order is None:
             self.order = self.form.fields.count()
+        if not self.slug:
+            slug = slugify(self).replace('-', '_')
+            self.slug = unique_slug(self.form.fields, "slug", slug)
         super(Field, self).save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):

@@ -29,6 +29,9 @@ class FormAdmin(AbstractFormAdmin):
     inlines = (FieldAdmin,)
     view_on_site = False
 
+    list_display = ("title", "email_copies", "total_entries", "admin_links")
+    list_editable = ("email_copies", )
+
     fieldsets = [
         (None, {
             "fields": (
