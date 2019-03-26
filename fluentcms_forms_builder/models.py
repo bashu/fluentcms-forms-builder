@@ -1,9 +1,14 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
-from django.core.urlresolvers import reverse
+try:
+    from django.urls import reverse
+except ImportError:
+    # For Django 1.8 compatibility
+    from django.core.urlresolvers import reverse
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.safestring import mark_safe
 
 from fluent_contents.models.db import ContentItem
 from forms_builder.forms.models import (
@@ -15,11 +20,11 @@ from .meta import AbstractClassWithoutFieldsNamed as without
 
 
 class FormEntry(AbstractFormEntry):
-    form = models.ForeignKey("Form", related_name="entries")
+    form = models.ForeignKey("Form", related_name="entries", on_delete=models.CASCADE)
 
 
 class FieldEntry(AbstractFieldEntry):
-    entry = models.ForeignKey("FormEntry", related_name="fields")
+    entry = models.ForeignKey("FormEntry", related_name="fields", on_delete=models.CASCADE)
 
 
 class Form(without(AbstractForm, 'redirect_url')):
@@ -43,14 +48,14 @@ class Form(without(AbstractForm, 'redirect_url')):
         ]
         for i, (text, url) in enumerate(links):
             links[i] = "<a href='%s'>%s</a>" % (url, ugettext(text))
-        return "<br>".join(links)
+        return mark_safe("<br>".join(links))
     admin_links.allow_tags = True
     admin_links.short_description = ""
 
 
 class Field(AbstractField):
 
-    form = models.ForeignKey("Form", related_name="fields")
+    form = models.ForeignKey("Form", related_name="fields", on_delete=models.CASCADE)
     order = models.IntegerField(_("Order"), null=True, blank=True)
 
     class Meta(AbstractField.Meta):
@@ -73,7 +78,7 @@ class Field(AbstractField):
 @python_2_unicode_compatible
 class FormItem(ContentItem):
 
-    form = models.ForeignKey(Form)
+    form = models.ForeignKey(Form, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = _("Form")
