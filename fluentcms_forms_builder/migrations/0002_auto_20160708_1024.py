@@ -80,7 +80,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('entry_time', models.DateTimeField(verbose_name='Date/time')),
-                ('form', models.ForeignKey(related_name='entries', to='fluentcms_forms_builder.Form')),
+                ('form', models.ForeignKey(related_name='entries', to='fluentcms_forms_builder.Form', on_delete=models.CASCADE)),
             ],
             options={
                 'abstract': False,
@@ -91,16 +91,16 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='formitem',
             name='form',
-            field=models.ForeignKey(to='fluentcms_forms_builder.Form'),
+            field=models.ForeignKey(to='fluentcms_forms_builder.Form', on_delete=models.CASCADE),
         ),
         migrations.AddField(
             model_name='fieldentry',
             name='entry',
-            field=models.ForeignKey(related_name='fields', to='fluentcms_forms_builder.FormEntry'),
+            field=models.ForeignKey(related_name='fields', to='fluentcms_forms_builder.FormEntry', on_delete=models.CASCADE),
         ),
         migrations.AddField(
             model_name='field',
             name='form',
-            field=models.ForeignKey(related_name='fields', to='fluentcms_forms_builder.Form'),
+            field=models.ForeignKey(related_name='fields', to='fluentcms_forms_builder.Form', on_delete=models.CASCADE),
         ),
     ]

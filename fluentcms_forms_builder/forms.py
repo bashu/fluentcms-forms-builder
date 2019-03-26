@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from forms_builder.forms.forms import FormForForm
+from forms_builder.forms.forms import FormForForm as AbstractFormForForm
 
 from .models import FieldEntry, FormEntry
 
 
-class FormForForm(FormForForm):
+class FormForForm(AbstractFormForForm):
     field_entry_model = FieldEntry
 
     class Meta:

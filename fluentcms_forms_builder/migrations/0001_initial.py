@@ -15,8 +15,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FormItem',
             fields=[
-                ('contentitem_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='fluent_contents.ContentItem')),
-                ('form', models.ForeignKey(to='forms.Form')),
+                ('contentitem_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='fluent_contents.ContentItem', on_delete=models.CASCADE)),
+                ('form', models.ForeignKey(to='forms.Form', on_delete=models.CASCADE)),
             ],
             options={
                 'db_table': 'contentitem_fluentcms_forms_builder_formitem',
