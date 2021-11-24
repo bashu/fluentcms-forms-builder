@@ -6,4 +6,3 @@ def AbstractClassWithoutFieldsNamed(cls, *excl):
         return cls
     else:
         raise Exception("Not an abstract model")
-

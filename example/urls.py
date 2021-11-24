@@ -15,32 +15,38 @@ Including another URLconf
 
 import re
 
-from django.urls import include, path, re_path
-from django.contrib import admin
-
 from django.conf import settings
+from django.contrib import admin
+from django.urls import include, path, re_path
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('tinymce/', include('tinymce.urls')),
+    path("admin/", admin.site.urls),
+    path("tinymce/", include("tinymce.urls")),
 ]
 
 if settings.SERVE_MEDIA:
     from django.views.static import serve
-    
+
     urlpatterns += [
-        re_path(r'^%s(?P<path>.*)$' % re.escape(settings.STATIC_URL.lstrip('/')), serve, kwargs={
-            'document_root': settings.STATIC_ROOT,
-        }),
+        re_path(
+            r"^%s(?P<path>.*)$" % re.escape(settings.STATIC_URL.lstrip("/")),
+            serve,
+            kwargs={
+                "document_root": settings.STATIC_ROOT,
+            },
+        ),
     ]
 
     urlpatterns += [
-        re_path(r'^%s(?P<path>.*)$' % re.escape(settings.MEDIA_URL.lstrip('/')), serve, kwargs={
-            'document_root': settings.MEDIA_ROOT,
-        }),
+        re_path(
+            r"^%s(?P<path>.*)$" % re.escape(settings.MEDIA_URL.lstrip("/")),
+            serve,
+            kwargs={
+                "document_root": settings.MEDIA_ROOT,
+            },
+        ),
     ]
 
 urlpatterns += [
-    path('', include('fluent_pages.urls')),
+    path("", include("fluent_pages.urls")),
 ]
-
