@@ -1,7 +1,7 @@
 from django.conf import settings
-from django.core.context_processors import csrf
 from django.shortcuts import redirect
 from django.template import RequestContext
+from django.template.context_processors import csrf
 from django.utils.translation import ugettext_lazy as _
 from email_extras.utils import send_mail_template
 from fluent_contents.extensions import ContentPlugin, plugin_pool

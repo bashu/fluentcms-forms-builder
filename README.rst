@@ -10,6 +10,9 @@ fluentcms-forms-builder
 .. image:: https://img.shields.io/github/license/bashu/fluentcms-forms-builder.svg
     :target: https://pypi.python.org/pypi/fluentcms-forms-builder/
 
+.. image:: https://app.travis-ci.com/bashu/fluentcms-forms-builder.svg?branch=develop
+    :target: https://app.travis-ci.com/bashu/fluentcms-forms-builder/
+
 django-forms-builder_ content plugins for django-fluent-contents_
 
 Installation
