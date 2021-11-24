@@ -1,11 +1,6 @@
-# -*- coding: utf-8 -*-
-
 from django.conf import settings
 
-try:
-    from django.core.context_processors import csrf
-except ImportError:
-    from django.template.context_processors import csrf
+from django.core.context_processors import csrf
 from django.utils.translation import ugettext_lazy as _
 from django.template import RequestContext
 from django.shortcuts import redirect
@@ -30,7 +25,7 @@ class FormPlugin(ContentPlugin):
     cache_output = False
 
     def get_context(self, request, instance, **kwargs):
-        context = super(FormPlugin, self).get_context(
+        context = super().get_context(
             request, instance, **kwargs)
         context.update(form=instance.form, **csrf(request))
         return context
@@ -70,7 +65,7 @@ class FormPlugin(ContentPlugin):
     def send_emails(self, request, form_for_form, form, entry, attachments):
         subject = form.email_subject
         if not subject:
-            subject = "%s - %s" % (form.title, entry.entry_time)
+            subject = f"{form.title} - {entry.entry_time}"
         fields = []
         for (k, v) in form_for_form.fields.items():
             value = form_for_form.cleaned_data[k]
