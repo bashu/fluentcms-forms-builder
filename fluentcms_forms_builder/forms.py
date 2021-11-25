@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from forms_builder.forms.forms import FormForForm as AbstractFormForForm
 
 from .models import FieldEntry, FormEntry
