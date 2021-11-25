@@ -15,11 +15,13 @@ if not settings.configured:
             },
         },
         SITE_ID=1,
+        ALLOWED_HOSTS=["*"],
         INSTALLED_APPS=(
-            "django.contrib.contenttypes",
             "django.contrib.admin",
             "django.contrib.auth",
+            "django.contrib.contenttypes",
             "django.contrib.messages",
+            "django.contrib.sessions",
             "django.contrib.sites",
             "fluent_contents",
             "fluent_contents.tests.testapp",
@@ -29,7 +31,7 @@ if not settings.configured:
         MIDDLEWARE=(
             "django.contrib.auth.middleware.AuthenticationMiddleware",
             "django.contrib.messages.middleware.MessageMiddleware",
-            "django.contrib.sessions.middleware.SessionMiddleware"
+            "django.contrib.sessions.middleware.SessionMiddleware",
         ),
         TEMPLATES=[
             {
@@ -46,12 +48,14 @@ if not settings.configured:
                         "django.template.context_processors.media",
                         "django.template.context_processors.request",
                         "django.template.context_processors.static",
-                        "django.contrib.messages.context_processors.messages",
                         "django.contrib.auth.context_processors.auth",
+                        "django.contrib.messages.context_processors.messages",
                     ),
                 },
             },
         ],
+        ROOT_URLCONF="fluentcms_forms_builder.tests.urls",
+        EMAIL_EXTRAS_USE_GNUPG=False,
         FLUENT_CONTENTS_CACHE_OUTPUT=False,
         TEST_RUNNER="django.test.runner.DiscoverRunner",
         DEFAULT_AUTO_FIELD="django.db.models.BigAutoField",

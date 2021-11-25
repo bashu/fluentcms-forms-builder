@@ -19,6 +19,7 @@ class FormPlugin(ContentPlugin):
     category = _("Form")
     render_template = "fluentcms_forms_builder/form.html"
     cache_output = False
+    submit_button_name = "form{pk}_submit"
 
     def get_context(self, request, instance, **kwargs):
         context = super().get_context(request, instance, **kwargs)
@@ -26,11 +27,21 @@ class FormPlugin(ContentPlugin):
         return context
 
     def render(self, request, instance, **kwargs):
+       # Allow multiple forms at the same page.
+        prefix = f"form{instance.pk}"
+        submit_button_name = self.submit_button_name.format(pk=instance.pk)
+        session_data_key = f"form{instance.pk}_submitted"
+
         context = self.get_context(request, instance, **kwargs)
+        context["submit_button_name"] = submit_button_name
+        context["completed"] = False
 
         form = context["form"]
         if request.method == "POST":
-            form_for_form = FormForForm(form, RequestContext(request), request.POST, request.FILES or None)
+            if submit_button_name in request.POST:
+                form_for_form = FormForForm(form, RequestContext(request), request.POST, request.FILES or None, prefix=prefix)
+            else:
+                form_for_form = FormForForm(form, RequestContext(request), initial=request.POST, prefix=prefix)
 
             if not form_for_form.is_valid():
                 form_invalid.send(sender=request, form=form_for_form)
@@ -45,12 +56,21 @@ class FormPlugin(ContentPlugin):
 
                 self.send_emails(request, form_for_form, form, entry, attachments)
 
-                if not request.is_ajax() and form.redirect_url:
-                    return redirect(str(form.redirect_url))
+                # Request a redirect.
+                # Use the session temporary so results are shown at the next GET call.
+                request.session[session_data_key] = True
 
-                return self.render_to_string(request, "fluentcms_forms_builder/form_sent.html", context)
+                if not request.is_ajax() and form.redirect_url:
+                    return self.redirect(str(form.redirect_url))
+
+                return self.redirect(request.path)
         else:
-            form_for_form = FormForForm(form, RequestContext(request))
+            form_for_form = FormForForm(form, RequestContext(request), prefix=prefix)
+
+            # Show completed message
+            if request.session.get(session_data_key):
+                del request.session[session_data_key]
+                context["completed"] = True
 
         context.update(form_for_form=form_for_form)
 
