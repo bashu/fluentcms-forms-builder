@@ -1,5 +1,5 @@
 include AUTHORS
 include README.rst
 include LICENSE
-recursive-include fluentcms_forms_builder/locale *
+recursive-include fluentcms_forms_builder/locale *.po *.mo
 recursive-include fluentcms_forms_builder/templates *.html
